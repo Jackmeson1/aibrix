@@ -1151,6 +1151,7 @@ func (r *ModelClaimReconciler) arrangeCard(
 	if err != nil {
 		return nil, err
 	}
+	r.warnKVCapacityBelowFloor(ctx, pod, engines)
 	needed, owed := needsDividing(engines, limits, why.minimumChangeBytes, why.owedBefore)
 	if why.onlyWhenNeeded && !needed {
 		return limits, cardLeftAlone{owed: owed}
